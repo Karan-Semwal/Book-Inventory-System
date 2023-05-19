@@ -1,15 +1,16 @@
 public class Book {
-    Book() {
-        title     = "unknown";
-        price     = 0;
-        author    = "unknown";
-        publisher = "unknown";
+    Book(String title) {
+        this.title  = title;
+        this.price  = 0;
+        this.author = "unknown";
+        this.publisher = "unknown";
     }
 
-    Book(String title, double price, String author) {
+    Book(String title, double price, String author, String publisher) {
         this.title = title;
         this.price = price;
         this.author = author;
+        this.publisher = publisher;
     }
 
     // setter functions
@@ -46,15 +47,6 @@ public class Book {
         return publisher;
     }
 
-    // TODO: ADD BOOK INTO DATABASE
-
-    // TODO: DELETE BOOK FROM DATABASE
-
-    // TODO: EDIT BOOK IN INVENTORY
-
-    // TODO: VIEW BOOKS IN INVENTORY
-
-    // TODO: FETCH BOOK DETAILS FROM DATABASE
 
     private String title;
     private double price;
