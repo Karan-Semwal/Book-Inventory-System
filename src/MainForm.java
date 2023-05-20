@@ -11,6 +11,8 @@ public class MainForm extends JFrame {
     private JButton detailsButton;
     private JButton removeButton;
     private JButton editButton;
+    private JPanel bookviewPanel;
+    private JPanel bookviewheaderPanel;
 
     public static void main(String[] args) {
         MainForm mainframe = new MainForm();
@@ -24,11 +26,7 @@ public class MainForm extends JFrame {
         setSize(800, 700);
         setMinimumSize(new Dimension(800, 700));
 
-        try {
-            setup();
-        }catch (Exception e) {
-            System.out.println("Exception Occurred");
-        }
+        setup();
 
         this.add(mainPanel);
 
