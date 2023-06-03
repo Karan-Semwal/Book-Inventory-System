@@ -1,3 +1,5 @@
+package Ui;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -17,19 +19,12 @@ public class MainForm extends JFrame {
     private JPanel bookviewheaderPanel;
     private JPanel bookviewbodyPanel;
 
-    public static void main(String[] args) {
-        MainForm mainframe = new MainForm();
-
-    }
-
     public MainForm() {
         setTitle("Book Inventory System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setSize(800, 700);
         setMinimumSize(new Dimension(800, 700));
-
-        setup();
 
         this.add(mainPanel);
 
@@ -92,12 +87,4 @@ public class MainForm extends JFrame {
             }
         });
     }
-
-    void setup() {
-        Font font = new Font("arial", Font.BOLD, 20);
-        titleLabel.setFont(font);
-
-        titleLabel.setSize(titlePanel.getSize());
-    }
-
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="MainForm">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Ui.MainForm">
   <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="2" left="2" bottom="2" right="2"/>
     <constraints>
-      <xy x="20" y="20" width="972" height="1075"/>
+      <xy x="20" y="20" width="972" height="695"/>
     </constraints>
     <properties>
       <background color="-13618119"/>
@@ -36,6 +36,7 @@
             </constraints>
             <properties>
               <enabled value="true"/>
+              <font name="Standard Symbols L" size="22" style="1"/>
               <foreground color="-1"/>
               <horizontalAlignment value="0"/>
               <horizontalTextPosition value="0"/>
@@ -275,7 +276,7 @@
                             </constraints>
                             <properties>
                               <foreground color="-14474461"/>
-                              <text value="Papa Ranjeet"/>
+                              <text value="Hero Ranjeet"/>
                             </properties>
                           </component>
                           <component id="1fbee" class="javax.swing.JLabel">
