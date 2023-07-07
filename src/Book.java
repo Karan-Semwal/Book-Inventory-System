@@ -37,4 +37,9 @@ public class Book {
         return m_price;
     }
 
+    public void tostring() {
+        System.out.printf("\n name: %s author: %s price: %.2f publisher: %s\n", m_name, m_author, m_price, m_publisher);
+    }
+
+
 }
