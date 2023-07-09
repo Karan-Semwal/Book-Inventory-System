@@ -19,6 +19,8 @@ class Main {
 
         String[] str = { "Book_Name", "Book_Author", "Book_Price", "Book_Publisher" };
 
+        List<Book> l = Database.retrieveBooks();
+
         gui = new MainForm();
         database = new Database();
 

@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.print.Book;
 
 public class MainForm extends JFrame {
     private JPanel mainPanel;
@@ -88,30 +89,30 @@ public class MainForm extends JFrame {
         });
     }
 
-    List<Book> book = Database::retrieveBooks();
+    List<Book> book = Database.retrieveBooks();
 
-    List<Book> people = new ArrayList<>();
-    people.add(new Person("John", 25, "Engineer"));
-    people.add(new Person("Alice", 30, "Doctor"));
-    people.add(new Person("Bob", 35, "Teacher"));
-
-    // Create column names
-    String[] columnNames = {"Name", "Age", "Occupation"};
-
-    // Create table data
-    Object[][] data = new Object[people.size()][columnNames.length];
-    for (int i = 0; i < people.size(); i++) {
-        Book person = people.get(i);
-        data[i][0] = person.getName();
-        data[i][1] = person.getAge();
-        data[i][2] = person.getOccupation();
-    }
-
-    // Create table
-    JTable table = new JTable(data, columnNames);
-    JScrollPane scrollPane = new JScrollPane(table);
-
-    // Add the table to the bookviewbodyPanel
-    bookviewbodyPanel.setLayout(new BorderLayout());
-    bookviewbodyPanel.add(scrollPane, BorderLayout.CENTER);
-}
+//    List<Book> people = new ArrayList<>();
+//    people.add(new Person("John", 25, "Engineer"));
+//    people.add(new Person("Alice", 30, "Doctor"));
+//    people.add(new Person("Bob", 35, "Teacher"));
+//
+//    // Create column names
+//    String[] columnNames = {"Name", "Age", "Occupation"};
+//
+//    // Create table data
+//    Object[][] data = new Object[people.size()][columnNames.length];
+//    for (int i = 0; i < people.size(); i++) {
+//        Book person = people.get(i);
+//        data[i][0] = person.getName();
+//        data[i][1] = person.getAge();
+//        data[i][2] = person.getOccupation();
+//    }
+//
+//    // Create table
+//    JTable table = new JTable(data, columnNames);
+//    JScrollPane scrollPane = new JScrollPane(table);
+//
+//    // Add the table to the bookviewbodyPanel
+//    bookviewbodyPanel.setLayout(new BorderLayout());
+//    bookviewbodyPanel.add(scrollPane, BorderLayout.CENTER);
+//}
