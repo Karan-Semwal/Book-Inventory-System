@@ -1,10 +1,11 @@
 package Ui;
 
+import Main.Book;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.print.Book;
 
 public class MainForm extends JFrame {
     private JPanel mainPanel;
@@ -21,7 +22,7 @@ public class MainForm extends JFrame {
     private JPanel bookviewbodyPanel;
 
     public MainForm() {
-        setTitle("Book Inventory System");
+        setTitle("Main.Book Inventory System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setSize(800, 700);
@@ -31,6 +32,7 @@ public class MainForm extends JFrame {
 
         setVisible(true);
 
+        // Add Button listeners
         addButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -45,6 +47,17 @@ public class MainForm extends JFrame {
                 addButton.setBackground(new Color(220, 220, 220));
             }
         });
+        addButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseExited(e);
+                AddEdit addForm = new AddEdit();
+                addForm.pack();
+                addForm.setVisible(true);
+            }
+        });
+
+        // Edit Button listeners
         editButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -54,11 +67,22 @@ public class MainForm extends JFrame {
         });
         editButton.addMouseListener(new MouseAdapter() {
             @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                Book tmp = new Book("testname", "testauthor", 500f, "testpub"); // TMP
+                AddEdit editForm = new AddEdit(tmp);
+                editForm.setVisible(true);
+            }
+        });
+        editButton.addMouseListener(new MouseAdapter() {
+            @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
                 editButton.setBackground(new Color(220, 220, 220));
             }
         });
+
+        // Remove Button listeners
         removeButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -73,6 +97,16 @@ public class MainForm extends JFrame {
                 removeButton.setBackground(new Color(220, 220, 220));
             }
         });
+        removeButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseExited(e);
+                Remove removeForm = new Remove();
+                removeForm.setVisible(true);
+            }
+        });
+
+        // Details Button listeners
         detailsButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -84,35 +118,17 @@ public class MainForm extends JFrame {
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                detailsButton.setBackground(new Color(220,220, 220));
+                detailsButton.setBackground(new Color(220, 220, 220));
+            }
+        });
+        detailsButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseExited(e);
+                Book tmp = new Book("testname", "testauthor", 500f, "testpub"); // TMP
+                Details detailsForm = new Details(tmp);
+                detailsForm.setVisible(true);
             }
         });
     }
-
-    List<Book> book = Database.retrieveBooks();
-
-//    List<Book> people = new ArrayList<>();
-//    people.add(new Person("John", 25, "Engineer"));
-//    people.add(new Person("Alice", 30, "Doctor"));
-//    people.add(new Person("Bob", 35, "Teacher"));
-//
-//    // Create column names
-//    String[] columnNames = {"Name", "Age", "Occupation"};
-//
-//    // Create table data
-//    Object[][] data = new Object[people.size()][columnNames.length];
-//    for (int i = 0; i < people.size(); i++) {
-//        Book person = people.get(i);
-//        data[i][0] = person.getName();
-//        data[i][1] = person.getAge();
-//        data[i][2] = person.getOccupation();
-//    }
-//
-//    // Create table
-//    JTable table = new JTable(data, columnNames);
-//    JScrollPane scrollPane = new JScrollPane(table);
-//
-//    // Add the table to the bookviewbodyPanel
-//    bookviewbodyPanel.setLayout(new BorderLayout());
-//    bookviewbodyPanel.add(scrollPane, BorderLayout.CENTER);
-//}
+}

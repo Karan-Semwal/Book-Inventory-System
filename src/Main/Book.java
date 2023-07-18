@@ -1,4 +1,18 @@
+package Main;
+
 public class Book {
+
+    public Book()
+    {
+    }
+
+    public Book(String name, String author, float price, String publisher)
+    {
+        set_name(name);
+        set_author(author);
+        set_price(price);
+        set_publisher(publisher);
+    }
 
     private String m_name;
     private String m_author;
