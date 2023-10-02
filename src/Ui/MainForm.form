@@ -241,6 +241,7 @@
                           </grid>
                         </constraints>
                         <properties>
+                          <enabled value="true"/>
                           <foreground color="-16777216"/>
                           <rowHeight value="18"/>
                           <selectionBackground color="-3815480"/>
