@@ -15,6 +15,28 @@ public class Database {
         connection = null;
     }
 
+    public void executeQuery(String query) throws SQLException {
+        connect();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        closeConnection();
+    }
+
+    public void insert(Book book) throws SQLException {
+        connect();
+        String query = "INSERT INTO BIS(Book_Author, Book_Name, Book_Price, Book_Publisher) VALUES (?, ?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, book.get_author());
+            preparedStatement.setString(2, book.get_name());
+            preparedStatement.setFloat(3, book.get_price());
+            preparedStatement.setString(4, book.get_publisher());
+
+            preparedStatement.executeUpdate();
+        }
+        closeConnection();
+    }
+
     public List<Book> retrieveBooks() throws SQLException {
         List<Book> booksList = new ArrayList<Book>();
         try {
@@ -59,5 +81,6 @@ public class Database {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        System.out.println("Connection closed successfully!");
     }
 }

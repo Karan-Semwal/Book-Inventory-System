@@ -2,16 +2,13 @@ package Ui;
 
 import Main.Book;
 import Main.Database;
-import com.mysql.cj.xdevapi.Column;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainForm extends JFrame {
@@ -32,6 +29,7 @@ public class MainForm extends JFrame {
     private JPanel bookviewheaderPanel;
     private JPanel bookviewbodyPanel;
     private JTable dataTable;
+    private JButton refreshButton;
 
     public MainForm(Database db)
     {
@@ -63,8 +61,19 @@ public class MainForm extends JFrame {
         );
     }
 
+    void addRow(Book book) {
+        booksTableModel.addRow(new Object[]{
+                book.get_name(),
+                book.get_author(),
+                book.get_price(),
+                book.get_publisher()
+        });
+        dataTable.setModel(booksTableModel);
+    }
+
     void updateBookTable() {
         // retrieve books data from database
+        booksTableModel.setRowCount(0);
         try {
             books = database.retrieveBooks();
         } catch (SQLException e) {
@@ -88,7 +97,7 @@ public class MainForm extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseExited(e);
-                AddEdit addForm = new AddEdit();
+                AddEdit addForm = new AddEdit(database, MainForm.this);
                 addForm.pack();
                 addForm.setVisible(true);
             }
@@ -100,8 +109,7 @@ public class MainForm extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 Book tmp = new Book("testname", "testauthor", 500f, "testpub"); // TMP
-                AddEdit editForm = new AddEdit(tmp);
-                editForm.setVisible(true);
+
             }
         });
 
@@ -123,6 +131,14 @@ public class MainForm extends JFrame {
                 Book tmp = new Book("testname", "testauthor", 500f, "testpub"); // TMP
                 Details detailsForm = new Details(tmp);
                 detailsForm.setVisible(true);
+            }
+        });
+
+        refreshButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseExited(e);
+                MainForm.this.updateBookTable();
             }
         });
     }

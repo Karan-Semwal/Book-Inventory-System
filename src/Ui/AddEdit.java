@@ -1,8 +1,11 @@
 package Ui;
 
 import Main.Book;
+import Main.Database;
+
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 
 public class AddEdit extends JDialog {
     private JPanel contentPane;
@@ -12,9 +15,14 @@ public class AddEdit extends JDialog {
     private JTextField authorTextField;
     private JTextField priceTextField;
     private JTextField publisherTextField;
+    private Database database;
+    private MainForm mainForm;
 
     // this constructor will be called by Add button
-    public AddEdit() {
+    public AddEdit(Database db, MainForm mainForm) {
+        this.database = db;
+        this.mainForm = mainForm;
+
         //book = new Book();
         setContentPane(contentPane);
         setModal(true);
@@ -25,7 +33,11 @@ public class AddEdit extends JDialog {
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                try {
+                    onOK();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
@@ -51,26 +63,23 @@ public class AddEdit extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    // this constructor will be called by Edit button
-    public AddEdit(Book currentBook) {
-        this();
-        book = currentBook;
+    private void onOK() throws SQLException {
+        Book newBook = new Book();
+        newBook.set_author(authorTextField.getText());
+        newBook.set_name(nameTextField.getText());
+        newBook.set_price(Integer.parseInt(priceTextField.getText()));
+        newBook.set_publisher(publisherTextField.getText());
 
-        nameTextField.setText(currentBook.get_name());
-        authorTextField.setText(currentBook.get_author());
-        priceTextField.setText(String.valueOf(currentBook.get_price()));
-        publisherTextField.setText(currentBook.get_publisher());
-    }
-
-    private void onOK() {
-        // add your code here
+        // add book to the ui
+        this.mainForm.addRow(newBook);
         dispose();
+
+        // insert new book into database
+        database.insert(newBook);
     }
 
     private void onCancel() {
         // add your code here if necessary
         dispose();
     }
-
-    Book book;
 }
